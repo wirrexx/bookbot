@@ -10,7 +10,7 @@ def count_words(text):
     split_word = text.split()
 
     count=len(split_word)
-    print(f"{count} words found in document")
+    print(f"{count} words found in the document")
 
 text = get_book_text("books/frankenstein.txt")
 count_words(text)

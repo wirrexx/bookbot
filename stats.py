@@ -1,34 +1,26 @@
-from collections import Counter
-def get_book_text(filepath):
-    with open(filepath, 'r', encoding='utf-8') as file:
-        return file.read()
-
-def count_words(text):
-    split_word = text.split()
-    count=len(split_word)
-    return count
-
-def count_chars(text):
-    
-    char_counts = Counter(char.lower() for char in text if char.isalpha())
-    return char_counts.most_common()
-
-            
-        
-def sort_on(filepath):
-    print("============ BOOKBOT ============")
-    print(f"Analyzing book found at {filepath}...")
-    
-    text = get_book_text(filepath)
-    
-    print("----------- Word Count ----------")
-    print(f"Found {count_words(text)} total words")
-    
-    print("--------- Character Count -------")
-    for char, count in count_chars(text):
-        print(f"{char}: {count}")
-    
-    print("============= END ===============")
+def get_num_words(text):
+    words = text.split()
+    return len(words)
 
 
-sort_on("books/frankenstein.txt")
+def get_chars_dict(text):
+    chars = {}
+    for c in text:
+        lowered = c.lower()
+        if lowered in chars:
+            chars[lowered] += 1
+        else:
+            chars[lowered] = 1
+    return chars
+
+
+def sort_on(item):
+    return item["num"]
+
+
+def chars_dict_to_sorted_list(num_chars_dict):
+    sorted_list = []
+    for ch in num_chars_dict:
+        sorted_list.append({"char": ch, "num": num_chars_dict[ch]})
+    sorted_list.sort(reverse=True, key=sort_on)
+    return sorted_list
